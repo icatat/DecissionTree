@@ -1,6 +1,9 @@
+import org.w3c.dom.Attr;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A DecisionTree object represents a decision tree, as described in, for
@@ -62,7 +65,7 @@ public abstract class DecisionTree {
 			return new DecisionTreeLeaf(examples, label, depth);
 		} else {
 			// find A -> the most important attribute
-			Attribute classAttr = examples.getAttributeSet().getClassAttribute(); //TO DO
+			Attribute maxImportanceAttr = importance(attributes, examples);
 
 			// construct a new list of attributes, excluding the most important attribute found
 
@@ -72,8 +75,8 @@ public abstract class DecisionTree {
 				newAttributeSet.addAttribute(newAttributes.get(j));
 			}
 
-			DecisionTree tree = new DecisionTreeInternal(examples, attributes, classAttr.getName(), depth);
-			String [] values = classAttr.getValues();
+			DecisionTree tree = new DecisionTreeInternal(examples, attributes, maxImportanceAttr.getName(), depth);
+			String [] values = maxImportanceAttr.getValues();
 
 			for (int i = 0; i < values.length; i++) {
 				String value = values[i];
@@ -95,6 +98,33 @@ public abstract class DecisionTree {
 
 			return tree;
 		}
+	}
+
+	private static Attribute importance(ArrayList<Attribute> attributes, InstanceSet examples) throws DecisionTreeException {
+		ArrayList<Instance> instances = examples.getInstances();
+
+		HashMap<Attribute, Distribution>distributions = new HashMap<>();
+		for (int i = 0; i < attributes.size(); i++) {
+			distributions.put(attributes.get(i), new Distribution(attributes.get(i)));
+		}
+
+		for (int i = 0; i < instances.size(); i++) {
+			String[] values = instances.get(i).getValues();
+
+			for (int j = 0; j < values.length; j++) {
+				distributions.get(attributes.get(i)).incrementFrequency(values[i]);
+			}
+		}
+
+		Attribute minEntropyAttribute = attributes.get(0);
+
+		for (int i = 0; i < attributes.size(); i++) {
+			if (distributions.get(attributes.get(i)).getEntropy() < distributions.get(minEntropyAttribute).getEntropy()) {
+				minEntropyAttribute = attributes.get(i);
+			}
+		}
+
+		return minEntropyAttribute;
 	}
 
 	// Return true if the given set of instances is pure, and false otherwise.

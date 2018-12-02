@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="82799222-3118-4dea-b708-87d092824d1a" name="Default" comment="" />
+    <list default="true" id="82799222-3118-4dea-b708-87d092824d1a" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/src/DecisionTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DecisionTree.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -12,28 +14,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DecisionTree.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DecisionTree.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DecisionTree.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="107" column="65" lean-forward="true" selection-start-line="107" selection-start-column="27" selection-end-line="107" selection-end-column="65" />
+            <state relative-caret-position="-317">
+              <caret line="73" column="60" lean-forward="true" selection-start-line="73" selection-start-column="60" selection-end-line="73" selection-end-column="60" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="weather.nominal.arff" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/weather.nominal.arff">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file leaf-file-name="Distribution.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Distribution.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1951">
+            <state relative-caret-position="601">
               <caret line="58" column="7" lean-forward="true" selection-start-line="58" selection-start-column="7" selection-end-line="58" selection-end-column="7" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DecisionTreeInternal.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DecisionTreeInternal.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DecisionTreeInternal.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
+            <state relative-caret-position="142">
               <caret line="174" column="9" selection-start-line="173" selection-start-column="12" selection-end-line="174" selection-end-column="9" />
             </state>
           </provider>
@@ -63,7 +73,7 @@
       <file leaf-file-name="Instance.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Instance.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
+            <state relative-caret-position="479">
               <caret line="39" column="25" lean-forward="true" selection-start-line="39" selection-start-column="25" selection-end-line="39" selection-end-column="25" />
             </state>
           </provider>
@@ -78,20 +88,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="contact-lenses.arff" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/contact-lenses.arff">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="609">
-              <caret line="65" column="34" lean-forward="true" selection-start-line="65" selection-start-column="34" selection-end-line="65" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="AttributeSet.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AttributeSet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="115" column="29" selection-start-line="115" selection-start-column="29" selection-end-line="115" selection-end-column="29" />
+            <state relative-caret-position="613">
+              <caret line="42" column="65" lean-forward="true" selection-start-line="42" selection-start-column="65" selection-end-line="42" selection-end-column="65" />
               <folding>
                 <element signature="e#3598#3599#0" expanded="true" />
                 <element signature="e#3671#3672#0" expanded="true" />
@@ -111,12 +112,15 @@
       </file>
     </leaf>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/DecisionTreeLeaf.java" />
-        <option value="$PROJECT_DIR$/src/DecisionTree.java" />
         <option value="$PROJECT_DIR$/src/DecisionTreeInternal.java" />
+        <option value="$PROJECT_DIR$/src/DecisionTree.java" />
       </list>
     </option>
   </component>
@@ -126,6 +130,7 @@
     <option name="width" value="1339" />
     <option name="height" value="773" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -245,7 +250,7 @@
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info id="Capture Tool" />
       <window_info id="Designer" />
@@ -273,9 +278,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/weather.nominal.arff">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/soybeanB.arff">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-5488" />
@@ -288,56 +290,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Attribute.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/InstanceSet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-890">
           <caret line="71" column="21" selection-start-line="71" selection-start-column="21" selection-end-line="71" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AttributeSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="115" column="29" selection-start-line="115" selection-start-column="29" selection-end-line="115" selection-end-column="29" />
-          <folding>
-            <element signature="e#3598#3599#0" expanded="true" />
-            <element signature="e#3671#3672#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DecisionTreeException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="19" column="1" lean-forward="true" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Instance.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="39" column="25" lean-forward="true" selection-start-line="39" selection-start-column="25" selection-end-line="39" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DecisionTree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="107" column="65" lean-forward="true" selection-start-line="107" selection-start-column="27" selection-end-line="107" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Distribution.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1951">
-          <caret line="58" column="7" lean-forward="true" selection-start-line="58" selection-start-column="7" selection-end-line="58" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -353,8 +309,60 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DecisionTreeInternal.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
+        <state relative-caret-position="142">
           <caret line="174" column="9" selection-start-line="173" selection-start-column="12" selection-end-line="174" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Attribute.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AttributeSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="613">
+          <caret line="42" column="65" lean-forward="true" selection-start-line="42" selection-start-column="65" selection-end-line="42" selection-end-column="65" />
+          <folding>
+            <element signature="e#3598#3599#0" expanded="true" />
+            <element signature="e#3671#3672#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecisionTreeException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="19" column="1" lean-forward="true" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/weather.nominal.arff">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Distribution.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="601">
+          <caret line="58" column="7" lean-forward="true" selection-start-line="58" selection-start-column="7" selection-end-line="58" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Instance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="479">
+          <caret line="39" column="25" lean-forward="true" selection-start-line="39" selection-start-column="25" selection-end-line="39" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecisionTree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-317">
+          <caret line="73" column="60" lean-forward="true" selection-start-line="73" selection-start-column="60" selection-end-line="73" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

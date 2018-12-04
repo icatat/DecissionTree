@@ -60,85 +60,31 @@ public abstract class DecisionTree {
 			String label, int depth) throws DecisionTreeException {
 		// The algorithm closely mimics figure 18.5 of Russell and Norvig.
 		if (examples.getNumInstances() == 0) {
+			// return Plurality-Value when no examples
 			return new DecisionTreeLeaf(parentExamples, label, depth);
 		} else if (isPure(examples) || attributes.size() == 0) {
+			// return Plurality-Value when attributes is empty or have the same classification
 			return new DecisionTreeLeaf(examples, label, depth);
 		} else {
-			// find A -> the most important attribute
-			Attribute maxImportanceAttr = importance(attributes, examples);
-
-			// construct a new list of attributes, excluding the most important attribute found
-
-			ArrayList<Attribute> newAttributes = removeClassAttribute(examples.getAttributeSet(), attributes);
-			AttributeSet newAttributeSet = new AttributeSet();
-			for (int j = 0; j < newAttributes.size(); j++) {
-				newAttributeSet.addAttribute(newAttributes.get(j));
-			}
-
-			DecisionTree tree = new DecisionTreeInternal(examples, attributes, maxImportanceAttr.getName(), depth);
-			String [] values = maxImportanceAttr.getValues();
-
-			for (int i = 0; i < values.length; i++) {
-				String value = values[i];
-
-				ArrayList<Instance>newInstances = new ArrayList<>();
-				ArrayList<Instance>exampleInstances = examples.getInstances();
-
-				for (int j = 0; j < exampleInstances.size(); j++) {
-					Instance cur = exampleInstances.get(i);
-					if (cur.getValues()[i].equals(value)) {
-						newInstances.add(cur);
-					}
-				}
-
-				InstanceSet newExamples = new InstanceSet(newAttributeSet, newInstances);
-				DecisionTree subtree = constructDecisionTree(newExamples, newAttributes, examples, value, depth + 1);
-				((DecisionTreeInternal) tree).children.put(value, subtree);
-			}
-
-			return tree;
+			//recursive call
+			return new DecisionTreeInternal(examples, attributes, label, depth);
 		}
 	}
 
-	private static Attribute importance(ArrayList<Attribute> attributes, InstanceSet examples) throws DecisionTreeException {
-		ArrayList<Instance> instances = examples.getInstances();
-
-		HashMap<Attribute, Distribution>distributions = new HashMap<>();
-		for (int i = 0; i < attributes.size(); i++) {
-			distributions.put(attributes.get(i), new Distribution(attributes.get(i)));
-		}
-
-		for (int i = 0; i < instances.size(); i++) {
-			String[] values = instances.get(i).getValues();
-
-			for (int j = 0; j < values.length; j++) {
-				distributions.get(attributes.get(i)).incrementFrequency(values[i]);
-			}
-		}
-
-		Attribute minEntropyAttribute = attributes.get(0);
-
-		for (int i = 0; i < attributes.size(); i++) {
-			if (distributions.get(attributes.get(i)).getEntropy() < distributions.get(minEntropyAttribute).getEntropy()) {
-				minEntropyAttribute = attributes.get(i);
-			}
-		}
-
-		return minEntropyAttribute;
-	}
 
 	// Return true if the given set of instances is pure, and false otherwise.
 	private static boolean isPure(InstanceSet instances) {
-		ArrayList<Instance> values = instances.getInstances();
+
 		AttributeSet curAttrSet = instances.getAttributeSet();
-		Attribute classification = instances.getAttributeSet().getClassAttribute();
+		int attrIndex = curAttrSet.getClassAttributeIndex();
+		ArrayList<Instance> values = instances.getInstances();
 
-		int attrIndex = curAttrSet.getAttributeIndex(classification);
-
+		//class attribute to compare to
 		String classValue = values.get(0).getValues()[attrIndex];
 
 		for (int i = 0; i < values.size(); i++) {
 			String curValue = values.get(i).getValues()[attrIndex];
+			//if the value does not match, then the data is not pure
 			if (!curValue.equals(classValue)) return false;
 		}
 
@@ -196,7 +142,7 @@ public abstract class DecisionTree {
 	 *            The instance to be classified.
 	 * @return The classification of the given instance.
 	 */
-	public abstract String decide(AttributeSet attributes, Instance instance);
+	public abstract String decide(AttributeSet attributes, Instance instance) throws DecisionTreeException;
 
 	/**
 	 * Print out the DecisionTree in a human-readable form
@@ -216,7 +162,7 @@ public abstract class DecisionTree {
 	 *            A set of examples on which the error rate will be computed.
 	 * @return The error rate of the decision tree on the given test set.
 	 */
-	public double computeErrorRate(InstanceSet testSet) {
+	public double computeErrorRate(InstanceSet testSet) throws DecisionTreeException{
 		int num_errors = 0;
 		AttributeSet attributes = testSet.getAttributeSet();
 		int classAttributeIndex = attributes.getClassAttributeIndex();
@@ -236,7 +182,7 @@ public abstract class DecisionTree {
 	 * @param testSet
 	 *            The set of instances whose decisions will be printed.
 	 */
-	public void printDecisions(InstanceSet testSet) {
+	public void printDecisions(InstanceSet testSet) throws DecisionTreeException{
 		AttributeSet attributes = testSet.getAttributeSet();
 		for (Instance instance : testSet.getInstances()) {
 			String decision = decide(attributes, instance);
@@ -289,6 +235,8 @@ public abstract class DecisionTree {
 		System.out.println("Error rate on training set: " + error_rate);
 		System.out.println();
 		decisionTree.printDecisions(trainingSet);
+		System.out.println("Error rate on training set: " + error_rate);
+
 	}
 
 }

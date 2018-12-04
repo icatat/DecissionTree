@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -74,11 +75,18 @@ public class DecisionTreeInternal extends DecisionTree {
 	private Attribute getSplitAttribute(InstanceSet examples,
 			ArrayList<Attribute> attributes) throws DecisionTreeException {
 
+		// get the attribute that would minimize the entropy
 		Attribute minEntropyAttr = attributes.get(0);
+		Double minEntropy = expectedEntropy(minEntropyAttr, examples);
 
 		for (int i = 0; i < attributes.size(); i++) {
-			if (expectedEntropy(attributes.get(i), examples) < expectedEntropy(minEntropyAttr, examples)) {
-				minEntropyAttr = attributes.get(i);
+			Attribute curAttr = attributes.get(i);
+			Double curEntropy = expectedEntropy(curAttr, examples);
+
+			//update if the current attribute minimizes the entropy
+			if (curEntropy < minEntropy) {
+				minEntropy = curEntropy;
+				minEntropyAttr = curAttr;
 			}
 		}
 
@@ -138,13 +146,14 @@ public class DecisionTreeInternal extends DecisionTree {
 	 */
 	private HashMap<String, DecisionTree> makeChildren(InstanceSet examples,
 			ArrayList<Attribute> attributes) throws DecisionTreeException {
-		HashMap<String, DecisionTree> children = new HashMap<>();
 
-		Attribute curAttr = getSplitAttribute(examples, attributes);
-		String[] curAttrValues = curAttr.getValues();
+		HashMap<String, DecisionTree> children = new HashMap<>();
+		String[] curAttrValues = splitAttribute.getValues();
+
 		for (int i = 0; i < curAttrValues.length; i++) {
-			InstanceSet matches = getMatches(curAttr, curAttrValues[i], examples);
-			children.put(curAttrValues[i], new DecisionTreeInternal(matches, attributes, curAttr.getName(), depth + 1));
+			// every match becomes a child of the current node
+			InstanceSet matches = getMatches(splitAttribute, curAttrValues[i], examples);
+			children.put(curAttrValues[i], DecisionTree.constructDecisionTree(matches, attributes, examples, curAttrValues[i], depth + 1));
 		}
 
 		return children;
@@ -165,32 +174,58 @@ public class DecisionTreeInternal extends DecisionTree {
 	 */
 	private double expectedEntropy(Attribute attribute, InstanceSet examples) throws DecisionTreeException {
 
+		//calculated as explained on pages 703-704 in the book
 		AttributeSet attributes = examples.getAttributeSet();
 		int classAttrIndex = attributes.getAttributeIndex(attribute);
+		// the distribution of the whole set
 		Distribution distr = new Distribution(attribute);
-
 		ArrayList<Instance>instances = examples.getInstances();
+		//populate the distribution
 		for (int i = 0; i < instances.size(); i++) {
 			distr.incrementFrequency(instances.get(i).getValues()[classAttrIndex]);
 		}
-		return distr.getEntropy();
+
+		//validate the probabilities
+		distr.computeProbabilitiesFromFrequencies();
+		//total frequencies for p + n as in the book
+		double totalFrequencies = (double) distr.getTotalFrequencies();
+
+		//remainder(A) as in the book
+		double remainder = 0;
+
+		String [] attrValues = attribute.getValues();
+
+		//calculate the subset of instances for every attribute value
+		//and their corresponding entropy
+		for (int i = 0; i < attrValues.length; i++) {
+
+			InstanceSet subsets = getMatches(attribute, attrValues[i], examples);
+			ArrayList<Instance>subsetsList = subsets.getInstances();
+
+			Distribution curDistr = new Distribution(attribute);
+			for (int j = 0; j < subsetsList.size(); j++) {
+						curDistr.incrementFrequency(subsetsList.get(j).getValues()[classAttrIndex]);
+			}
+
+			curDistr.computeProbabilitiesFromFrequencies();
+			double curTotalFreq = (double)curDistr.getTotalFrequencies();
+
+			remainder = remainder + (curTotalFreq/totalFrequencies) * curDistr.getEntropy();
+
+		}
+		return remainder;
+
 	}
 
 	/* (non-Javadoc)
 	 * @see DecisionTree#decide(AttributeSet, Instance)
 	 */
 	@Override
-	public String decide(AttributeSet attributes, Instance instance) {
-		String[]instanceValues = instance.getValues();
-		ArrayList<Attribute>attrList = attributes.getAttributes();
-		//splitAttribute - here
-		Attribute classAttr = attributes.getClassAttribute();
-		Distribution distr = new Distribution(classAttr);
+	public String decide(AttributeSet attributes, Instance instance) throws DecisionTreeException {
 
-
-		// TODO: fill in the body of this method and fix the return statement
-		// HINT: use the Distribution class
-		return distr.getNameOfMaxProbability();
+		int index = attributes.getAttributeIndex(splitAttribute);
+		String value = instance.getValues()[index];
+		return children.get(value).decide(attributes, instance);
 	}
 
 	/* (non-Javadoc)

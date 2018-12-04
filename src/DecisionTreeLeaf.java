@@ -40,10 +40,12 @@ public class DecisionTreeLeaf extends DecisionTree {
 
 		AttributeSet attributes = examples.getAttributeSet();
 		Attribute classAttr = attributes.getClassAttribute();
-		int classAttrIndex = attributes.getClassAttributeIndex();
 		Distribution distr = new Distribution(classAttr);
 
+		// get the value with the highest frequency
+		int classAttrIndex = attributes.getClassAttributeIndex();
 		ArrayList<Instance>instances = examples.getInstances();
+
 		for (int i = 0; i < instances.size(); i++) {
 			distr.incrementFrequency(instances.get(i).getValues()[classAttrIndex]);
 		}
